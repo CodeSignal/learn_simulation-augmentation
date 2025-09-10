@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Augmentation Playground</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Augmentation Playground</h1>
+            <p>Explore how different augmentation techniques transform your images</p>
+            <button id="helpBtn" class="help-btn">Help & Guide</button>
+        </header>
+
+        <div class="main-content">
+            <!-- Image Display Section -->
+            <div class="image-section">
+                <div class="image-container">
+                    <div class="image-panel">
+                        <h3>Original Image</h3>
+                        <div class="image-wrapper">
+                            <img id="originalImage" src="" alt="Original Image">
+                        </div>
+                    </div>
+                    
+                    <div class="image-panel">
+                        <h3>Augmented Image</h3>
+                        <div class="image-wrapper">
+                            <img id="augmentedImage" src="" alt="Augmented Image">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Panel moved below images -->
+                <div class="info-panel">
+                    <h3>Data Augmentation Techniques</h3>
+                    <ul>
+                        <li><strong>Geometric Transformations:</strong> Flip, rotate, crop - make models invariant to orientation and position</li>
+                        <li><strong>Color Adjustments:</strong> Brightness, contrast, saturation - handle different lighting and color conditions</li>
+                        <li><strong>Noise & Blur:</strong> Add realistic imperfections that models encounter in real-world data</li>
+                        <li><strong>Combination:</strong> Apply multiple techniques together for maximum data diversity</li>
+                        <li><strong>Domain-Specific:</strong> Different techniques work better for different types of images (medical, satellite, etc.)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <div class="image-selector">
+                    <label for="imageSelect">Choose an image:</label>
+                    <select id="imageSelect">
+                        <option value="">Loading images...</option>
+                    </select>
+                </div>
+
+                <div class="augmentation-controls">
+                    <h3>Augmentation Techniques</h3>
+                    
+                    <!-- Geometric Transformations -->
+                    <div class="control-group">
+                        <h4>Geometric Transformations</h4>
+                        
+                        <div class="control-item">
+                            <button id="flipHorizontal" class="aug-btn">Flip Horizontal</button>
+                        </div>
+                        
+                        <div class="control-item">
+                            <button id="flipVertical" class="aug-btn">Flip Vertical</button>
+                        </div>
+                        
+                        <div class="control-item">
+                            <label for="rotationSlider">Rotation: <span id="rotationValue">0°</span></label>
+                            <input type="range" id="rotationSlider" min="-180" max="180" value="0" step="5">
+                        </div>
+                        
+                        <div class="control-item">
+                            <label for="cropSlider">Crop: <span id="cropValue">0%</span></label>
+                            <input type="range" id="cropSlider" min="0" max="50" value="0" step="5">
+                        </div>
+                    </div>
+
+                    <!-- Color Adjustments -->
+                    <div class="control-group">
+                        <h4>Color Adjustments</h4>
+                        
+                        <div class="control-item">
+                            <label for="brightnessSlider">Brightness: <span id="brightnessValue">100%</span></label>
+                            <input type="range" id="brightnessSlider" min="0" max="200" value="100" step="5">
+                        </div>
+                        
+                        <div class="control-item">
+                            <label for="contrastSlider">Contrast: <span id="contrastValue">100%</span></label>
+                            <input type="range" id="contrastSlider" min="0" max="200" value="100" step="5">
+                        </div>
+                        
+                        <div class="control-item">
+                            <label for="saturationSlider">Saturation: <span id="saturationValue">100%</span></label>
+                            <input type="range" id="saturationSlider" min="0" max="200" value="100" step="5">
+                        </div>
+                    </div>
+
+                    <!-- Noise and Blur -->
+                    <div class="control-group">
+                        <h4>Noise & Blur</h4>
+                        
+                        <div class="control-item">
+                            <label for="noiseSlider">Noise: <span id="noiseValue">0%</span></label>
+                            <input type="range" id="noiseSlider" min="0" max="50" value="0" step="2">
+                        </div>
+                        
+                        <div class="control-item">
+                            <label for="blurSlider">Blur: <span id="blurValue">0px</span></label>
+                            <input type="range" id="blurSlider" min="0" max="10" value="0" step="0.5">
+                        </div>
+                    </div>
+
+
+
+                    <!-- Reset Button -->
+                    <div class="control-item">
+                        <button id="resetBtn" class="reset-btn">Reset All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Data Augmentation Learning Guide</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="help-section">
+                    <h3>What is Data Augmentation?</h3>
+                    <p>Data augmentation is a technique used in machine learning to artificially increase the size of your training dataset by creating modified versions of existing images. This helps models learn better and become more robust to real-world variations.</p>
+                </div>
+
+                <div class="help-section">
+                    <h3>How to Use This Simulation</h3>
+                    <ol>
+                        <li><strong>Choose an Image:</strong> Select from the dropdown to load a sample image</li>
+                        <li><strong>Apply Techniques:</strong> Use sliders and buttons to transform the image</li>
+                        <li><strong>Compare Results:</strong> See original vs augmented images side by side</li>
+                        <li><strong>Experiment:</strong> Try different combinations of techniques</li>
+                        <li><strong>Reset:</strong> Use the reset button to start over</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>Geometric Transformations</h3>
+                    <ul>
+                        <li><strong>Flip Horizontal/Vertical:</strong> Mirror images - useful when object orientation doesn't matter</li>
+                        <li><strong>Rotation:</strong> Rotate images by any angle - helps models recognize objects from different viewpoints</li>
+                        <li><strong>Crop:</strong> Remove parts of the image - simulates different camera distances and focuses</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>Color Adjustments</h3>
+                    <ul>
+                        <li><strong>Brightness:</strong> Adjust lighting - handles different lighting conditions</li>
+                        <li><strong>Contrast:</strong> Modify color intensity - improves feature visibility</li>
+                        <li><strong>Saturation:</strong> Control color vibrancy - handles different color conditions</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>Noise & Blur Effects</h3>
+                    <ul>
+                        <li><strong>Noise:</strong> Add random pixels - makes models robust to sensor noise</li>
+                        <li><strong>Blur:</strong> Soften image details - handles motion blur and focus issues</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>Advanced Techniques</h3>
+                    <ul>
+                        <li><strong>Zoom:</strong> Scale images - simulates different camera distances</li>
+                        <li><strong>Shear:</strong> Skew images - handles perspective changes</li>
+                        <li><strong>Mixup:</strong> Blend two images - creates smooth transitions between classes</li>
+                        <li><strong>Cutout:</strong> Remove random patches - forces focus on different image parts</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>Pro Tips</h3>
+                    <ul>
+                        <li><strong>Start Simple:</strong> Begin with one technique at a time</li>
+                        <li><strong>Combine Techniques:</strong> Use multiple augmentations for maximum diversity</li>
+                        <li><strong>Consider Your Domain:</strong> Different techniques work better for different image types</li>
+                        <li><strong>Monitor Performance:</strong> Always validate that augmentations improve your model</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3>Real-World Applications</h3>
+                    <ul>
+                        <li><strong>Medical Imaging:</strong> Rotation and brightness help with different scan orientations</li>
+                        <li><strong>Autonomous Driving:</strong> Weather conditions, lighting, and camera angles</li>
+                        <li><strong>Satellite Imagery:</strong> Different times of day, seasons, and weather</li>
+                        <li><strong>Face Recognition:</strong> Different expressions, angles, and lighting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
